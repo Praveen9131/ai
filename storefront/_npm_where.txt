@@ -1,0 +1,7 @@
+﻿where.exe : INFO: Could not find files for the given pattern(s).
+At C:\Users\jogip\AppData\Local\Temp\ps-script-654d3324-07fb-407a-a8a0-3e07a1d613ff.ps1:82 char:1
++ where.exe npm 2>&1 | Out-File -FilePath "\\wsl.localhost\Ubuntu-24.04 ...
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INFO: Could not...ven pattern(s).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

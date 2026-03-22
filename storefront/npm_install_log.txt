@@ -1,0 +1,2 @@
+bash: line 1: npm: command not found
+EXIT:127
