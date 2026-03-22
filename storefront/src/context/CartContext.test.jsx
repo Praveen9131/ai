@@ -3,7 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { CartProvider, useCart } from "./CartContext.jsx";
 
 function Probe() {
-  const { cartItems, cartCount, cartTotal, addToCart, updateQty } = useCart();
+  const { cartItems, cartCount, cartTotal, addToCart, updateQty, clearCart } =
+    useCart();
   return (
     <div>
       <span data-testid="count">{cartCount}</span>
@@ -29,6 +30,9 @@ function Probe() {
       <button type="button" onClick={() => updateQty(1, 3)}>
         set3
       </button>
+      <button type="button" onClick={clearCart}>
+        clear
+      </button>
     </div>
   );
 }
@@ -49,5 +53,8 @@ describe("CartProvider", () => {
     fireEvent.click(screen.getByText("set3"));
     expect(screen.getByTestId("count").textContent).toBe("3");
     expect(screen.getByTestId("total").textContent).toBe("300");
+    fireEvent.click(screen.getByText("clear"));
+    expect(screen.getByTestId("count").textContent).toBe("0");
+    expect(screen.getByTestId("total").textContent).toBe("0");
   });
 });

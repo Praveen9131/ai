@@ -8,8 +8,8 @@ import {
 
 const CartContext = createContext(null);
 
-export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+export function CartProvider({ children, initialCartItems }) {
+  const [cartItems, setCartItems] = useState(() => initialCartItems ?? []);
 
   const addToCart = useCallback((p) => {
     setCartItems((prev) => {
@@ -34,6 +34,10 @@ export function CartProvider({ children }) {
     });
   }, []);
 
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+  }, []);
+
   const cartTotal = useMemo(
     () => cartItems.reduce((sum, i) => sum + i.price * i.qty, 0),
     [cartItems]
@@ -50,10 +54,19 @@ export function CartProvider({ children }) {
       addToCart,
       removeFromCart,
       updateQty,
+      clearCart,
       cartTotal,
       cartCount,
     }),
-    [cartItems, addToCart, removeFromCart, updateQty, cartTotal, cartCount]
+    [
+      cartItems,
+      addToCart,
+      removeFromCart,
+      updateQty,
+      clearCart,
+      cartTotal,
+      cartCount,
+    ]
   );
 
   return (

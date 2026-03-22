@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
-import { useToast } from "../context/ToastContext.jsx";
 import CartItem from "../components/CartItem.jsx";
-
-const FREE_SHIPPING_MIN = 499;
+import { FREE_SHIPPING_MIN } from "../constants/checkout.js";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const { cartItems, cartTotal } = useCart();
-  const { showToast } = useToast();
   const shipping = cartTotal >= FREE_SHIPPING_MIN || cartTotal === 0 ? 0 : 60;
   const total = cartTotal + shipping;
 
@@ -65,9 +63,7 @@ export default function Cart() {
             </dl>
             <button
               type="button"
-              onClick={() =>
-                showToast("Coming Soon — Redirecting to Shopify!")
-              }
+              onClick={() => navigate("/checkout")}
               className="mt-6 w-full rounded-full bg-brand-green px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:opacity-90"
             >
               Proceed to Checkout

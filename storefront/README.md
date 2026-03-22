@@ -35,6 +35,13 @@ Base styles: all `h1`–`h4` use **Playfair** + bold unless a component override
 
 On **product detail** pages: a short **tick chime** and an **invite**; **Ask Zaanvi** opens a **full-height overlay** with a **50/50 split**: **left** = product summary (cream panel, stat cards, use-case checklist); **right** = **Zaanvi — Nutrition AI** chat with quick-reply chips and orange-accent input (`ProductAssistantChat.jsx`). On small screens the product block stacks above the assistant. Replace demo replies with a real API when ready.
 
+## Checkout — Razorpay **demo sample** (no charges)
+
+From **Cart** → **Proceed to Checkout** goes to **`/checkout`**. **Open Razorpay demo** opens a **sample-only** modal (`DemoRazorpayModal.jsx`): it does **not** load Razorpay’s SDK or call their APIs. **Complete demo payment** shows a toast with a fake payment id, **clears the cart**, and sends the user to **`/shop`**.
+
+- **Merchant label** on the sheet comes from **`VITE_SITE_BRAND_NAME`** (see `.env.example`), defaulting to **Zaanvi Organics**.
+- **Production:** create orders on a backend, then load [Razorpay Checkout](https://razorpay.com/docs/payments/payment-gateway/web-integration/standard/build-integration/) with a **publishable** key from env; never commit `key_secret`.
+
 ## Run locally
 
 From this directory (`ai/storefront/`):
