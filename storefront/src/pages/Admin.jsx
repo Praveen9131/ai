@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import PasswordGate from "../components/PasswordGate.jsx";
 import AdminLayout from "../components/AdminLayout.jsx";
 import { products as seedProducts } from "../data/products.js";
@@ -137,10 +137,16 @@ export default function Admin() {
           name: f.name.trim(),
           category: f.category,
           price,
-          weight: f.weight.trim() || "â€”",
+          weight: f.weight.trim() || "—",
           trimester: Number(f.trimester),
           tag: f.tag.trim() || "New",
           description: f.description.trim() || "",
+          audiences: ["pregnancy", "wellness"],
+          useCases: [
+            "Everyday millet nutrition",
+            "Family-friendly meals",
+            "Wholesome pantry staple",
+          ],
         },
       ]);
     } else {

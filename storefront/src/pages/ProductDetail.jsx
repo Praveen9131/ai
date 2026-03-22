@@ -4,6 +4,8 @@ import { Bone, CircleDot, Dumbbell } from "lucide-react";
 import { products } from "../data/products.js";
 import { useCart } from "../context/CartContext.jsx";
 import { useToast } from "../context/ToastContext.jsx";
+import ProductAssistantChat from "../components/ProductAssistantChat.jsx";
+import ClaudeStyleIcon from "../components/ClaudeStyleIcon.jsx";
 
 const highlights = [
   { icon: CircleDot, label: "Iron" },
@@ -15,6 +17,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const product = products.find((p) => String(p.id) === String(id));
   const [qty, setQty] = useState(1);
+  const [assistantOpen, setAssistantOpen] = useState(false);
   const { addToCart } = useCart();
   const { showToast } = useToast();
 
@@ -81,6 +84,39 @@ export default function ProductDetail() {
             {product.description}
           </p>
 
+          {product.useCases?.length ? (
+            <div className="mt-8 rounded-2xl border border-brand-light bg-brand-cream/40 px-4 py-4 md:px-5">
+              <p className="font-heading text-xs font-bold uppercase tracking-wider text-brand-green-dark">
+                Use cases
+              </p>
+              <ul className="mt-3 list-inside list-disc space-y-2 text-sm font-medium text-brand-dark/85">
+                {product.useCases.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          <button
+            type="button"
+            onClick={() => setAssistantOpen(true)}
+            className="mt-8 flex w-full max-w-lg items-center gap-4 rounded-2xl border-2 border-stone-200 bg-white p-4 text-left shadow-sm transition hover:border-orange-200 hover:bg-orange-50/40 focus-visible:outline focus-visible:ring-2 focus-visible:ring-brand-green"
+            aria-label="Open Zaanvi assistant for this product"
+          >
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-900 ring-1 ring-orange-200/70">
+              <ClaudeStyleIcon className="h-10 w-10" />
+            </span>
+            <span className="min-w-0">
+              <span className="block font-heading text-lg font-bold text-brand-dark">
+                Ask Zaanvi
+              </span>
+              <span className="mt-0.5 block text-sm font-medium text-brand-dark/70">
+                Full-screen split view: product summary on the left, nutrition
+                AI on the right (slides in from the edge).
+              </span>
+            </span>
+          </button>
+
           <p className="mt-8 font-heading text-xs font-bold uppercase tracking-wider text-brand-dark">
             Nutritional highlights
           </p>
@@ -126,6 +162,12 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+
+      <ProductAssistantChat
+        product={product}
+        open={assistantOpen}
+        onOpenChange={setAssistantOpen}
+      />
 
       {related.length > 0 && (
         <section className="mt-16 border-t border-brand-light pt-12">

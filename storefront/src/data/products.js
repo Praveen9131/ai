@@ -2,7 +2,7 @@
 const u = (id) =>
   `https://images.unsplash.com/${id}?w=900&auto=format&fit=crop&q=82`;
 
-export const products = [
+const _rawProducts = [
   {
     id: 1,
     name: "Foxtail Millet Porridge Mix",
@@ -203,6 +203,162 @@ export const products = [
       "Complete postpartum recovery and lactation support kit.",
   },
 ];
+
+/**
+ * Extra shop facets & copy. Merged into each product below.
+ * `audiences`: keys for Shop “Wellness focus” chips (`pregnancy`, `diabetic`, `wellness`).
+ */
+const PRODUCT_ENRICH = {
+  1: {
+    audiences: ["pregnancy", "diabetic"],
+    useCases: [
+      "Gentle breakfast during morning sickness",
+      "Iron-rich snack between meals",
+      "Warm evening porridge for comfort",
+    ],
+  },
+  2: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "One-pot lunch with vegetables",
+      "High-fibre meal for steady energy",
+      "Post-activity recovery dinner",
+    ],
+  },
+  3: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Quick weekday breakfast",
+      "Light dinner when appetite is low",
+      "Tiffin-box friendly upma",
+    ],
+  },
+  4: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Roti or paratha with dal",
+      "Calcium support with greens",
+      "Family dinner alongside sabzi",
+    ],
+  },
+  5: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Weekend dosa or uttapam",
+      "Protein-forward brunch",
+      "Kids’ lunchbox dosa rolls",
+    ],
+  },
+  6: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Mid-morning energy bite",
+      "Calcium boost with milk or ghee",
+      "Festival tray sweet (portion-aware)",
+    ],
+  },
+  7: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Vegetable pulao for lunch",
+      "Meal-prep batch for the week",
+      "Light dinner with raita",
+    ],
+  },
+  8: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Third-trimester energy drink",
+      "Pre-labour nourishment routine",
+      "Shared with family as malt drink",
+    ],
+  },
+  9: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Comfort dessert after dinner",
+      "Omega-aware sweet craving",
+      "Warm halwa in cooler months",
+    ],
+  },
+  10: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Travel-friendly thepla stack",
+      "Iron support with yogurt",
+      "Office lunch with pickle",
+    ],
+  },
+  11: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Postpartum morning kanji ritual",
+      "Hydration with gentle grains",
+      "Lactation-supporting routine (with diet advice)",
+    ],
+  },
+  12: {
+    audiences: ["pregnancy", "diabetic", "wellness"],
+    useCases: [
+      "Quick nursing-break meal",
+      "Weekend brunch pancakes",
+      "Toddler-friendly finger food",
+    ],
+  },
+  13: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Evening snack while nursing",
+      "Desk snack between feeds",
+      "Gift for new mothers",
+    ],
+  },
+  14: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Starter bundle for week 4–12",
+      "Gift for newly expecting parents",
+      "One-cart solution for early trimester",
+    ],
+  },
+  15: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Mid-pregnancy nutrition reset",
+      "Gifting at baby shower",
+      "Two-week meal rotation base",
+    ],
+  },
+  16: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "Final weeks energy planning",
+      "Iron + energy combo before due date",
+      "Hospital bag friendly dry mixes",
+    ],
+  },
+  17: {
+    audiences: ["pregnancy", "wellness"],
+    useCases: [
+      "First 40 days recovery support",
+      "Lactation-focused pantry restock",
+      "Care package for new Maa",
+    ],
+  },
+};
+
+const DEFAULT_AUDIENCES = ["pregnancy", "wellness"];
+const DEFAULT_USE_CASES = [
+  "Everyday millet nutrition",
+  "Family-friendly meals",
+  "Wholesome alternative to refined grains",
+];
+
+export const products = _rawProducts.map((p) => ({
+  ...p,
+  audiences: PRODUCT_ENRICH[p.id]?.audiences ?? DEFAULT_AUDIENCES,
+  useCases: PRODUCT_ENRICH[p.id]?.useCases ?? DEFAULT_USE_CASES,
+}));
 
 /** Featured on home bestsellers carousel */
 export const bestsellerIds = [14, 15, 6, 11];

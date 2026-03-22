@@ -33,6 +33,11 @@ export default function ProductCard({ product }) {
           <h3 className="font-heading text-lg font-bold text-brand-dark group-hover:text-brand-green">
             {product.name}
           </h3>
+          {product.useCases?.[0] ? (
+            <p className="mt-2 line-clamp-2 text-xs font-medium leading-snug text-brand-dark/70">
+              {product.useCases[0]}
+            </p>
+          ) : null}
           <p className="mt-1 text-base font-bold text-brand-green">₹{product.price}</p>
         </div>
       </Link>

@@ -24,6 +24,17 @@ Base styles: all `h1`–`h4` use **Playfair** + bold unless a component override
 | `brand-dark` | `#2C2C2C` | Body text |
 | `brand-light` | `#EAF2EA` | Borders / soft fills |
 
+## Shop filters & product data
+
+- **Layout:** **Filters** live in a **left sidebar** on large screens; on small screens use the **Filters** button (bottom sheet). A **search** field above the grid filters by name, description, tag, category, use cases, and audiences.
+- **Journey stage** links in the sidebar map to `?filter=` (trimesters, postpartum, kits).
+- **Wellness focus** links use `?audience=` (`pregnancy`, `diabetic`, `wellness`). Params combine (e.g. `/shop?filter=2&audience=diabetic`).
+- Each product in `src/data/products.js` is merged with **`audiences`** and **`useCases`** from `PRODUCT_ENRICH`.
+
+## Product guide (demo chat)
+
+On **product detail** pages: a short **tick chime** and an **invite**; **Ask Zaanvi** opens a **full-height overlay** with a **50/50 split**: **left** = product summary (cream panel, stat cards, use-case checklist); **right** = **Zaanvi — Nutrition AI** chat with quick-reply chips and orange-accent input (`ProductAssistantChat.jsx`). On small screens the product block stacks above the assistant. Replace demo replies with a real API when ready.
+
 ## Run locally
 
 From this directory (`ai/storefront/`):
