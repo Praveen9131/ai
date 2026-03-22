@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Eye, EyeOff, Lock } from "lucide-react";
 
-const ADMIN_PASSWORD = "zaanvi@admin2024";
+/** Set `VITE_ADMIN_PASSWORD` in Vercel / `.env` for production; still client-visible — use real auth for sensitive data. */
+const ADMIN_PASSWORD =
+  import.meta.env.VITE_ADMIN_PASSWORD ?? "zaanvi@admin2024";
 
 export default function PasswordGate({ children }) {
   const [authed, setAuthed] = useState(false);

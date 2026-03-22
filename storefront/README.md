@@ -61,6 +61,13 @@ Full-width **sky → blue** gradient with title, subtitle, and CTA button (`src/
 
 Footer is **light** (`bg-white`, top border `brand-light`): logo + tagline, **Explore** (Shop / About / Contact), **Follow** (Instagram / Facebook from env), centered copyright. `src/components/Footer.jsx`. Social URLs: `src/config/site.js` + **`VITE_SITE_*`** (see `.env.example`).
 
+## Deploy on Vercel
+
+- **Root directory:** If the repo root is *above* this app (e.g. `shopify/` containing `ai/storefront/`), set the Vercel project **Root Directory** to **`ai/storefront`** and **Install Command** / **Build Command** / **Output Directory** accordingly (`npm install`, `npm run build`, `dist`).
+- **Why `/admin` was 404:** Vite is an SPA — opening `https://yoursite.vercel.app/admin` asks the CDN for a file named `admin`, which does not exist. **`vercel.json`** adds a rewrite so unknown paths serve **`index.html`** and React Router can render `/admin`.
+- After adding or changing `vercel.json`, trigger a **new deployment**.
+- **Admin gate:** Optional env **`VITE_ADMIN_PASSWORD`** (see `.env.example`). If unset, the default in `PasswordGate` applies. This is still checked in the browser only — not a substitute for server-side auth.
+
 ## Tests
 
 ```bash
