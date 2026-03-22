@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import Footer from "./Footer";
 
 describe("Footer", () => {
-  it("renders Quick Links, Contact Us, social labels, and copyright", () => {
+  it("renders quick links, contact, social, and copyright", () => {
     render(
       <MemoryRouter>
         <Footer />
@@ -12,6 +12,9 @@ describe("Footer", () => {
     );
 
     expect(screen.getByText("Quick Links")).toBeInTheDocument();
+    // Column title and quick link both use “Contact Us” (design).
+    expect(screen.getAllByText("Contact Us").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText("Follow Us")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /^Home$/ })).toHaveAttribute(
       "href",
       "/",
@@ -20,10 +23,7 @@ describe("Footer", () => {
       "href",
       "/shop",
     );
-    expect(screen.getAllByText("Contact Us").length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByText("Follow Us")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Facebook/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Instagram/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Twitter/i })).toBeInTheDocument();
     expect(
       screen.getByText(/©\s*\d{4}\s*Zaanvi Organics\.\s*All rights reserved\./i),

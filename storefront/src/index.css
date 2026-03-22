@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Playfair+Display:wght@600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,23 +9,14 @@ html {
 }
 
 body {
-  @apply antialiased font-body font-normal text-brand-dark;
+  @apply antialiased font-body text-brand-dark;
 }
 
-/**
- * Type scale: Heading Poppins 700, Subheading Poppins 500, body Inter 400.
- * Components can override with explicit font-* utilities.
- */
 @layer base {
   h1,
-  h2 {
-    @apply font-heading font-bold tracking-tight text-brand-dark;
-  }
-
+  h2,
   h3,
   h4 {
-    /* Use theme() here — @apply font-subheading can fail in @layer base (PostCSS). */
-    font-family: theme("fontFamily.subheading");
-    @apply font-medium tracking-tight text-brand-dark;
+    @apply font-heading font-bold tracking-tight text-brand-dark;
   }
 }

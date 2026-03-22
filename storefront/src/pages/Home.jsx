@@ -37,12 +37,12 @@ const usps = [
   {
     icon: Baby,
     title: "Trimester-Specific",
-    text: "Curated nutrition for each trimester and postpartum, so you get the right balance when it matters most.",
+    text: "Curated nutrition for each trimester and postpartum, supporting both baby's growth and mother's recovery.",
   },
   {
     icon: Sparkles,
     title: "Millet-Based",
-    text: "Ragi, foxtail, barnyard and more — ancient grains, modern convenience, rooted in Indian wisdom.",
+    text: "Ragi, foxtail, barnyard and more — ancient grains, modern convenience.",
   },
 ];
 
@@ -82,7 +82,6 @@ export default function Home() {
   return (
     <div>
       <section className="relative isolate min-h-[min(88vh,560px)] overflow-hidden px-4 py-16 text-white md:min-h-[min(85vh,640px)] md:py-24">
-        {/* Hero video (public/hero-video.mp4 — copy of Video_Generation_Request.mp4) */}
         <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
           <video
             autoPlay
@@ -99,101 +98,90 @@ export default function Home() {
             style={{ backgroundImage: `url(${heroBackgroundImage})` }}
           />
         </div>
-        {/* Darken video / image for contrast — blackish wash */}
         <div
           className="pointer-events-none absolute inset-0 bg-black/30"
           aria-hidden
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-green/72 to-brand-gold/68" aria-hidden />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="font-subheading text-xs font-medium uppercase tracking-[0.2em] text-amber-200 drop-shadow-[0_1px_6px_rgba(0,0,0,0.65)]">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-200 drop-shadow-[0_1px_6px_rgba(0,0,0,0.65)]">
             Zaanvi Organics
           </p>
-          <h1 className="mt-5 font-heading text-4xl font-bold leading-[1.12] text-[#FFFCF7] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)] sm:text-5xl md:text-6xl md:leading-tight lg:text-[3.5rem]">
+          <h1 className="mt-5 font-heading text-4xl font-bold leading-[1.15] text-[#FFFCF7] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)] md:text-5xl md:leading-tight">
             Born from Nature. Made for Maa.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base font-normal leading-relaxed text-stone-200 drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-base font-semibold leading-relaxed text-stone-200 drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] md:text-lg">
             Trimester-wise millet nutrition for pregnancy and postpartum — crafted
             with care in Hyderabad.
           </p>
           <Link
             to="/shop"
-            className="mt-9 inline-block rounded-full border-2 border-[#FFFCF7]/40 bg-brand-cream/95 px-10 py-3.5 text-sm font-bold uppercase tracking-widest text-brand-green shadow-lg backdrop-blur-sm transition hover:border-brand-cream hover:bg-brand-cream"
+            className="mt-9 inline-block rounded-full border-2 border-[#FFFCF7]/40 bg-brand-cream/95 px-10 py-3.5 text-sm font-black uppercase tracking-widest text-brand-green shadow-lg backdrop-blur-sm transition hover:border-brand-cream hover:bg-brand-cream"
           >
             Shop Now
           </Link>
         </div>
       </section>
 
-      {/* Section 2 — Why choose us (copy + image) */}
-      <section
-        className="bg-white py-16 md:py-20 lg:py-24"
-        aria-labelledby="why-choose-heading"
-      >
+      <section className="bg-white py-14 md:py-20" aria-labelledby="why-zaanvi-heading">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-            <div className="min-w-0 text-left lg:pr-4">
-              <p className="font-subheading text-xs font-medium uppercase tracking-[0.18em] text-brand-green md:text-sm">
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green-dark">
                 Why Zaanvi
               </p>
               <h2
-                id="why-choose-heading"
-                className="mt-3 font-heading text-3xl font-bold leading-[1.12] tracking-tight text-brand-dark md:text-4xl md:leading-[1.1] lg:text-5xl xl:text-[2.75rem]"
+                id="why-zaanvi-heading"
+                className="mt-3 font-heading text-2xl font-bold text-brand-green-dark md:text-3xl lg:text-4xl"
               >
-                Why Choose{" "}
-                <span className="text-brand-green">Zaanvi Organics?</span>
+                Why Choose Zaanvi Organics?
               </h2>
-              <p className="mt-5 max-w-xl font-subheading text-base font-medium leading-relaxed text-brand-dark/80 md:mt-6 md:text-lg lg:text-xl">
+              <p className="mt-4 max-w-xl text-sm font-semibold leading-relaxed text-brand-green md:text-base">
                 We combine certified organic millets, trimester-smart recipes, and
                 honest sourcing — so every mother gets nourishment she can feel good
                 about, from early pregnancy through postpartum.
               </p>
-              <ul className="mt-8 grid gap-5 sm:grid-cols-2 sm:gap-6 lg:mt-10">
+              <div className="mt-8 grid gap-5 sm:grid-cols-2">
                 {usps.map(({ icon: Icon, title, text }) => (
-                  <li
+                  <div
                     key={title}
-                    className="flex gap-4 rounded-2xl border border-brand-light/90 bg-brand-cream/35 p-5 shadow-sm transition hover:border-brand-green/25 hover:shadow-md"
+                    className="rounded-2xl border border-amber-100/90 bg-[#FFF9EB] p-5 shadow-sm transition hover:shadow-md"
                   >
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-light text-brand-green">
-                      <Icon className="h-7 w-7" aria-hidden />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-green-dark shadow-sm">
+                      <Icon className="h-5 w-5" strokeWidth={2} aria-hidden />
                     </div>
-                    <div className="min-w-0">
-                      <h3 className="font-heading text-lg font-bold leading-snug text-brand-dark md:text-xl">
-                        {title}
-                      </h3>
-                      <p className="mt-2 text-sm font-normal leading-relaxed text-brand-dark/75 md:text-base">
-                        {text}
-                      </p>
-                    </div>
-                  </li>
+                    <h3 className="mt-4 font-heading text-base font-bold text-brand-green-dark md:text-lg">
+                      {title}
+                    </h3>
+                    <p className="mt-2 text-left text-sm font-medium leading-relaxed text-brand-dark/80">
+                      {text}
+                    </p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-brand-light/80 bg-brand-light/40 shadow-lg lg:mx-0 lg:max-w-none lg:max-h-[min(640px,75vh)]">
-              <img
-                src={whyChooseUsImage}
-                alt="Wholesome organic meals and fresh ingredients — the care behind every Zaanvi blend."
-                className="absolute inset-0 h-full w-full object-cover"
-                width={1200}
-                height={1500}
-                loading="lazy"
-                decoding="async"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-green-dark/25 via-transparent to-transparent"
-                aria-hidden
-              />
+            <div className="lg:col-span-5">
+              <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black/5">
+                <img
+                  src={whyChooseUsImage}
+                  alt="Wholesome organic salad bowl with fresh vegetables, avocado, and grains on a wooden surface"
+                  className="aspect-[3/4] h-full w-full object-cover"
+                  width={600}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 3 — Trimester journey */}
-      <section className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
-        <h2 className="text-center font-heading text-3xl font-bold leading-tight tracking-tight text-brand-dark md:text-4xl lg:text-5xl">
+      <section className="mx-auto max-w-6xl px-4 py-14 md:px-6">
+        <h2 className="text-center font-heading text-2xl font-bold text-brand-dark md:text-4xl">
           Your Trimester Journey
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center font-subheading text-base font-medium text-brand-dark/75 md:mt-5 md:text-lg">
+        <p className="mx-auto mt-3 max-w-2xl text-center text-sm font-semibold text-brand-dark/75 md:text-base">
           Tap a stage to shop picks curated for that phase.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -203,8 +191,8 @@ export default function Home() {
               to={`/shop?filter=${j.filter}`}
               className="rounded-2xl bg-white p-6 shadow-md transition hover:shadow-lg"
             >
-              <h3 className="font-heading text-xl font-bold text-brand-green md:text-2xl">{j.title}</h3>
-              <p className="mt-1 text-sm font-normal text-brand-dark/75">{j.subtitle}</p>
+              <h3 className="font-heading text-xl font-bold text-brand-green">{j.title}</h3>
+              <p className="mt-1 text-sm font-semibold text-brand-dark/75">{j.subtitle}</p>
               <span className="mt-4 inline-block text-sm font-bold uppercase tracking-wide text-brand-gold">
                 Shop this stage →
               </span>
@@ -213,14 +201,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-brand-light bg-white py-16 md:py-20">
+      <section className="border-y border-brand-light bg-white py-14">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <h2 className="font-heading text-3xl font-bold leading-tight tracking-tight text-brand-dark md:text-4xl lg:text-5xl">
+              <h2 className="font-heading text-2xl font-bold text-brand-dark md:text-4xl">
                 Bestsellers
               </h2>
-              <p className="mt-3 font-subheading text-base font-medium text-brand-dark/75 md:text-lg">
+              <p className="mt-2 text-sm font-semibold text-brand-dark/75 md:text-base">
                 Loved by mothers across India.
               </p>
             </div>
@@ -259,9 +247,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-brand-light/50 py-16 md:py-20">
+      <section className="bg-brand-light/50 py-14">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <h2 className="text-center font-heading text-3xl font-bold leading-tight tracking-tight text-brand-dark md:text-4xl lg:text-5xl">
+          <h2 className="text-center font-heading text-2xl font-bold text-brand-dark md:text-4xl">
             From mothers like you
           </h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -271,7 +259,7 @@ export default function Home() {
                 className="rounded-2xl bg-white p-6 shadow-md"
               >
                 <Heart className="h-6 w-6 text-brand-gold" aria-hidden />
-                <p className="mt-4 text-sm font-normal leading-relaxed text-brand-dark">
+                <p className="mt-4 text-sm font-semibold leading-relaxed text-brand-dark">
                   “{t.quote}”
                 </p>
                 <footer className="mt-4 text-sm font-bold text-brand-green">

@@ -36,6 +36,21 @@ export const siteConfig = {
   },
   /** Footer column heading above social links */
   socialColumnTitle: env.VITE_SITE_SOCIAL_COLUMN_TITLE ?? "Follow Us",
+  /** Dark footer — quick links column */
+  quickLinksTitle: env.VITE_SITE_QUICK_LINKS_TITLE ?? "Quick Links",
+  contactColumnTitle: env.VITE_SITE_CONTACT_TITLE ?? "Contact Us",
+  /**
+   * Footer nav (marketing layout). Paths are app routes.
+   * @type {{ label: string; to: string }[]}
+   */
+  footerQuickLinks: [
+    { label: "Home", to: "/" },
+    { label: "Menu", to: "/shop" },
+    { label: "About", to: "/about" },
+    { label: "Gallery", to: "/gallery" },
+    { label: "Contact Us", to: "/contact" },
+    { label: "My Orders", to: "/cart" },
+  ],
   /**
    * Footer hero line (reference layout). Defaults to full brand name.
    * Example SeaSide: same as brandName; split copyright below for © line emphasis.

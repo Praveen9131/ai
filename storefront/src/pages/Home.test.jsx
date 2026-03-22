@@ -6,7 +6,7 @@ import { ToastProvider } from "../context/ToastContext.jsx";
 import Home from "./Home";
 
 describe("Home", () => {
-  it("renders Why Choose section with heading and supporting image", () => {
+  it("renders Why Choose section with heading, image, and USP cards", () => {
     render(
       <MemoryRouter>
         <ToastProvider>
@@ -20,10 +20,10 @@ describe("Home", () => {
     expect(
       screen.getByRole("heading", { name: /why choose.*zaanvi organics/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Why Zaanvi/i)).toBeInTheDocument();
+    expect(screen.getByText("100% Organic")).toBeInTheDocument();
     expect(
       screen.getByRole("img", {
-        name: /wholesome organic meals/i,
+        name: /wholesome organic salad bowl/i,
       }),
     ).toBeInTheDocument();
   });

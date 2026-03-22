@@ -2,16 +2,19 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { siteConfig } from "../config/site.js";
+import BrandLogoMark from "./BrandLogoMark.jsx";
 
 const navLinkClass = ({ isActive }) =>
   [
-    "font-subheading text-xs font-medium uppercase tracking-[0.12em] text-brand-dark/80 transition-colors hover:text-brand-dark",
+    "text-xs font-bold uppercase tracking-[0.12em] text-brand-dark/80 transition-colors hover:text-brand-dark",
     isActive ? "text-brand-dark underline decoration-2 decoration-brand-green underline-offset-4" : "",
   ].join(" ");
 
 export default function Navbar() {
   const { cartCount } = useCart();
   const [open, setOpen] = useState(false);
+  const { brandName } = siteConfig;
 
   const links = (
     <>
@@ -33,36 +36,26 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-brand-light bg-white shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 md:gap-6 md:px-6 md:py-3">
-        {/* Brand: compact logo (height-capped — avoids huge 500px box) + text */}
         <Link
           to="/"
           className="flex min-w-0 shrink items-center gap-2.5 sm:gap-3"
           onClick={() => setOpen(false)}
         >
-          <img
-            src="/logo.png"
-            alt=""
-            className="h-11 w-auto max-h-12 max-w-[100px] shrink-0 object-contain object-center sm:h-12 sm:max-h-14 sm:max-w-[120px] md:h-14 md:max-h-16 md:max-w-[140px]"
-            width="140"
-            height="64"
-            decoding="async"
-          />
+          <BrandLogoMark size="md" />
           <div className="min-w-0 leading-tight">
-            <p className="font-heading text-sm font-bold tracking-tight text-brand-gold-rich sm:text-base md:text-lg">
-              Zaanvi Organics
+            <p className="font-heading text-base font-black tracking-tight text-black sm:text-lg md:text-xl">
+              {brandName}
             </p>
-            <p className="mt-0.5 font-subheading text-[10px] font-medium uppercase tracking-wide text-brand-gold-rich/90 sm:text-[11px] md:text-xs">
+            <p className="mt-0.5 font-body text-[10px] font-bold uppercase tracking-wide text-brand-dark/70 sm:text-[11px] md:text-xs">
               Born from Nature • Made for Maa
             </p>
           </div>
         </Link>
 
-        {/* Center nav — desktop */}
-        <nav className="hidden flex-1 items-center justify-center gap-6 xl:gap-8 lg:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-6 lg:flex xl:gap-8">
           {links}
         </nav>
 
-        {/* Right actions — same row as logo */}
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
           <Link
             to="/cart"
@@ -104,7 +97,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
       {open && (
         <div className="border-t border-brand-light bg-white px-4 py-4 shadow-inner lg:hidden">
           <nav className="flex flex-col gap-3">{links}</nav>
