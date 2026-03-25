@@ -65,6 +65,7 @@ function FilterSidebarContent({
   activeAudience,
   onCloseMobile,
 }) {
+  const clearFiltersHref = "/shop";
   const linkClass = (isOn, variant) => {
     const base =
       "block w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition";
@@ -88,6 +89,18 @@ function FilterSidebarContent({
 
   return (
     <nav className="space-y-8" aria-label="Shop filters">
+      <div className="flex items-center justify-between gap-4">
+        <p className="font-body text-[11px] font-bold uppercase tracking-wider text-brand-dark/50">
+          Refine
+        </p>
+        <Link
+          to={clearFiltersHref}
+          className="shrink-0 text-xs font-bold text-brand-dark/55 transition hover:text-brand-dark"
+          onClick={handleNav}
+        >
+          Clear filters
+        </Link>
+      </div>
       <div>
         <p className="font-body text-[11px] font-bold uppercase tracking-wider text-brand-dark/50">
           Journey stage
@@ -195,61 +208,73 @@ export default function Shop() {
               type="button"
               onClick={() => setMobileFiltersOpen(true)}
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-brand-light bg-white px-4 py-2.5 text-sm font-bold text-brand-dark shadow-sm transition hover:bg-brand-cream/50 lg:hidden"
+              aria-controls="shop-filters-drawer"
+              aria-expanded={mobileFiltersOpen}
             >
               <Filter className="h-4 w-4" aria-hidden />
               Filters
             </button>
+
+            <Link
+              to="/orders"
+              className="inline-flex shrink-0 items-center justify-center rounded-full border border-brand-light bg-white px-4 py-2.5 text-sm font-bold text-brand-dark shadow-sm transition hover:bg-brand-cream/50"
+            >
+              My Orders
+            </Link>
           </div>
 
-          {/* Search */}
-          <div className="relative mt-8">
-            <label htmlFor="shop-search" className="sr-only">
-              Search products
-            </label>
-            <Search
-              className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-dark/40"
-              aria-hidden
-            />
-            <input
-              id="shop-search"
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name, ingredient, or use case…"
-              className="w-full rounded-full border border-brand-light bg-white py-3.5 pl-12 pr-12 text-sm font-medium text-brand-dark shadow-sm outline-none ring-brand-green/30 transition placeholder:text-brand-dark/45 focus:border-brand-green focus:ring-2 md:text-base"
-              autoComplete="off"
-            />
-            {search ? (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-brand-dark/45 hover:bg-brand-light hover:text-brand-dark"
-                aria-label="Clear search"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            ) : null}
-          </div>
+          {/* Results panel */}
+          <div className="mt-8 rounded-3xl border border-brand-light bg-white/80 p-5 shadow-sm backdrop-blur md:p-7">
+            {/* Search */}
+            <div className="relative">
+              <label htmlFor="shop-search" className="sr-only">
+                Search products
+              </label>
+              <Search
+                className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-dark/40"
+                aria-hidden
+              />
+              <input
+                id="shop-search"
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search by name, ingredient, or use case…"
+                className="w-full rounded-full border border-brand-light bg-white py-3.5 pl-12 pr-12 text-sm font-medium text-brand-dark shadow-sm outline-none ring-brand-green/30 transition placeholder:text-brand-dark/45 focus:border-brand-green focus:ring-2 md:text-base"
+                autoComplete="off"
+              />
+              {search ? (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-brand-dark/45 hover:bg-brand-light hover:text-brand-dark"
+                  aria-label="Clear search"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              ) : null}
+            </div>
 
-          <p className="mt-3 text-xs font-medium text-brand-dark/50">
-            Showing{" "}
-            <span className="font-bold text-brand-dark">{filtered.length}</span>{" "}
-            of {products.length} products
-            {search.trim() ? ` matching “${search.trim()}”` : ""}
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {filtered.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-
-          {filtered.length === 0 && (
-            <p className="mt-14 rounded-2xl border border-dashed border-brand-light bg-brand-cream/30 px-6 py-12 text-center text-brand-dark/70">
-              No products match. Try clearing search or setting filters to
-              &quot;All&quot;.
+            <p className="mt-3 text-xs font-medium text-brand-dark/50">
+              Showing{" "}
+              <span className="font-bold text-brand-dark">{filtered.length}</span>{" "}
+              of {products.length} products
+              {search.trim() ? ` matching “${search.trim()}”` : ""}
             </p>
-          )}
+
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+              {filtered.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+
+            {filtered.length === 0 && (
+              <p className="mt-14 rounded-2xl border border-dashed border-brand-light bg-brand-cream/30 px-6 py-12 text-center text-brand-dark/70">
+                No products match. Try clearing search or setting filters to
+                &quot;All&quot;.
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -262,7 +287,12 @@ export default function Shop() {
             aria-label="Close filters"
             onClick={() => setMobileFiltersOpen(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-2xl border-t border-brand-light bg-white p-6 shadow-2xl">
+          <div
+            id="shop-filters-drawer"
+            role="dialog"
+            aria-modal="true"
+            className="absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-2xl border-t border-brand-light bg-white p-6 shadow-2xl"
+          >
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-heading text-xl font-bold text-brand-dark">
                 Filters

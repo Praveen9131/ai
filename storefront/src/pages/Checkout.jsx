@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import { useToast } from "../context/ToastContext.jsx";
+import { useOrders } from "../context/OrdersContext.jsx";
 import DemoRazorpayModal from "../components/DemoRazorpayModal.jsx";
 import { getMerchantDisplayName } from "../config/merchant.js";
 import { FREE_SHIPPING_MIN } from "../constants/checkout.js";
@@ -10,6 +11,7 @@ export default function Checkout() {
   const navigate = useNavigate();
   const { cartItems, cartTotal, clearCart } = useCart();
   const { showToast } = useToast();
+  const { addDemoOrder } = useOrders();
   const [demoOpen, setDemoOpen] = useState(false);
 
   const shipping =
@@ -24,10 +26,24 @@ export default function Checkout() {
 
   const handleDemoSuccess = () => {
     setDemoOpen(false);
-    const fakeId = `pay_demo_${Date.now().toString(36)}`;
-    showToast(`Demo payment successful — ${fakeId}`);
+    const paymentRef = `pay_demo_${Date.now().toString(36)}`;
+    const orderId = addDemoOrder({
+      items: cartItems.map((i) => ({
+        id: i.id,
+        name: i.name,
+        price: i.price,
+        qty: i.qty,
+        category: i.category,
+      })),
+      amountInr: total,
+      paymentRef,
+    });
+    showToast(`Order placed successfully — ${orderId}`);
     clearCart();
-    navigate("/shop", { replace: true });
+    navigate(
+      `/orders?orderId=${encodeURIComponent(orderId)}`,
+      { replace: true },
+    );
   };
 
   if (cartItems.length === 0) {
